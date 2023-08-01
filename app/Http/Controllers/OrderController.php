@@ -36,6 +36,7 @@ class OrderController extends Controller
         if(!$order){
             return response()->json('Not found', 404);
         }
+        $order->products;
         return response()->json($order, 200);
     }
 

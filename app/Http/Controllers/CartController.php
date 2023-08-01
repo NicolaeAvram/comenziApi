@@ -21,6 +21,7 @@ class CartController extends Controller
             return response()->json('User not found', 404);
         }  
         $cart = Cart::where('user_id', '=', $user_id)->first();
+        $cart->products;
         if(!$cart){
             return response()->json('Cart not found', 404);
         }    
