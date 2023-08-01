@@ -24,6 +24,7 @@ class CreateOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
+                'user_id'=>'integer',
                 'total_value'=>'required|numeric',
                 'payment_method'=>'required|in:cash,card'
         ];

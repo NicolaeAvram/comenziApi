@@ -22,6 +22,7 @@ class OrderController extends Controller
      */
     public function store(CreateOrderRequest $request)
     {
+        
         $order = Order::create($request->validated());
         return response()->json($order, 201);
     }
