@@ -27,5 +27,8 @@ Route::apiResource('/orders', OrderController::class);
 Route::get('/carts/{user_id}', [CartController::class, 'show'])->name('carts.show');
 Route::put('/carts/{user_id}',[CartController::class, 'adauga'])->name('carts.adauga');
 Route::delete('/carts/{user_id}/{id}', [CartController::class, 'sterge'])->name('carts.sterge');
+Route::post('/users/register', [UserController::class, 'register'])->name('users.register');
+Route::post('/users/login', [UserController::class, 'login'])->name('users.login');
+Route::get('/users/logout/{id}', [UserController::class, 'logout'])->name('users.logout');
 Route::apiResource('/users', UserController::class);
 

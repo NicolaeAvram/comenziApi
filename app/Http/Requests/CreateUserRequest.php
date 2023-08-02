@@ -28,7 +28,7 @@ class CreateUserRequest extends FormRequest
                 'name'=>'required|min:3',
                 'email'=>'required|unique:users|email:rfc',
                 'password'=>'required|min:8'
-                //sa caut si alte reguli de validare
+             
         ];
     }
 

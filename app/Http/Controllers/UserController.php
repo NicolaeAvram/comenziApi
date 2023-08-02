@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\CreateUserRequest;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -20,11 +21,12 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateUserRequest $request)
+    public function register(CreateUserRequest $request)
     {
         $user = User::create($request->validated());       
         return response()->json($user, 201);
     }
+
 
     /**
      * Display the specified resource.
@@ -63,5 +65,27 @@ class UserController extends Controller
         }
         $user->delete();
         return response()->json('', 204);
+    }
+
+    public function login(Request $request)
+    {
+        $user = User::where("email", $request->email)->first();
+        $user->makeVisible('password');
+        if(!$user){
+            return response()->json('Not found', 404);
+        }
+        if(!Hash::check($request->password, $user->password)){
+            return response()->json('Not found password', 404);
+        }
+        $token = $user->createToken('token_de_autentificare');
+  
+        return response()->json(['token'=>$token->plainTextToken], 200);
+    }
+
+    public function logout(string $id){
+        $user = User::find($id);
+       
+        $user->tokens()->delete();
+        return response()->json('Sesiunea s-a incheiat', 200);
     }
 }
