@@ -82,10 +82,8 @@ class UserController extends Controller
         return response()->json(['token'=>$token->plainTextToken], 200);
     }
 
-    public function logout(string $id){
-        $user = User::find($id);
-       
-        $user->tokens()->delete();
+    public function logout(Request $request){
+        $request->user()->tokens()->delete(); 
         return response()->json('Sesiunea s-a incheiat', 200);
     }
 }

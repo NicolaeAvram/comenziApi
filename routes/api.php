@@ -29,6 +29,6 @@ Route::put('/carts/{user_id}',[CartController::class, 'adauga'])->name('carts.ad
 Route::delete('/carts/{user_id}/{id}', [CartController::class, 'sterge'])->name('carts.sterge');
 Route::post('/users/register', [UserController::class, 'register'])->name('users.register');
 Route::post('/users/login', [UserController::class, 'login'])->name('users.login');
-Route::get('/users/logout/{id}', [UserController::class, 'logout'])->name('users.logout');
+Route::middleware('auth:sanctum')->post('/users/logout', [UserController::class, 'logout'])->name('users.logout');
 Route::apiResource('/users', UserController::class);
 
